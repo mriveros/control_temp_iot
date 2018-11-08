@@ -49,7 +49,7 @@ void loop() {
  esp8266.println(getData1);delay(1500);countTrueCommand++;
  sendCommand("AT+CIPCLOSE=0",5,"OK");
  Sleepy::loseSomeTime(5000);
-
+  
 }
 
 int getSensorTemperature(){

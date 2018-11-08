@@ -1,8 +1,11 @@
 #include <SoftwareSerial.h>
 #define RX 10
 #define TX 11
-#include "DHT.h"
+#include "dht.h"
 #define dht_apin A0 // Analog Pin sensor is connected to
+#include <JeeLib.h>
+ISR(WDT_vect) { Sleepy::watchdogEvent(); }
+
 String AP = "FLIA RIVEROS BENITEZ";       // AP
 String PASS = "lulilove06012018"; // OCULTANDING PASSWORD
 String API = "VZHYBF4M4LDNA67F";   // OCULTANDING API
@@ -45,6 +48,8 @@ void loop() {
  sendCommand("AT+CIPSEND=0," +String(getData1.length()+4),4,">");
  esp8266.println(getData1);delay(1500);countTrueCommand++;
  sendCommand("AT+CIPCLOSE=0",5,"OK");
+ Sleepy::loseSomeTime(5000);
+  
 }
 
 int getSensorTemperature(){
